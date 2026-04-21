@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUCÁN – Club de Vinos de Mendoza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --wine: #823531;
+    --wine-dark: #412d17;
+    --wine-light: #a35450;
+    --cream: #e4d4ba;
+    --cream-light: #f2ebe0;
+    --cream-dark: #d4c09e;
+    --off-white: #faf7f2;
+    --text-dark: #1a1209;
+    --text-mid: #5a4a35;
+    --text-light: #8a7060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(130,53,49,0.15);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+  .nav-logo svg { width: 40px; height: 40px; }
+  .nav-logo-text {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--wine);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--wine-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--wine); }
+  .nav-cta {
+    background: var(--wine);
+    color: #fff !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--wine-dark) !important; color: #fff !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-video-wrap video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(26,18,9,0.35) 0%,
+      rgba(26,18,9,0.55) 60%,
+      rgba(26,18,9,0.75) 100%
+    );
+    z-index: 1;
+  }
+  /* Fallback bg when no video */
+  .hero-bg-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(130,53,49,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(65,45,23,0.4) 0%, transparent 60%),
+      #1a1209;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--cream);
+  }
+  .hero-sub {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(228,212,186,0.9);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: var(--wine);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #6a2824; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.4rem;
+    border: 1.5px solid rgba(255,255,255,0.55);
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover {
+    border-color: #fff;
+    background: rgba(255,255,255,0.08);
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeUp 1s 0.8s ease both;
+  }
+  .hero-scroll span {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(228,212,186,0.7);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(228,212,186,0.7), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .section {
+    padding: 7rem 4rem;
+  }
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    color: var(--wine-dark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--wine); }
+  .section-body {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-mid);
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  .bg-cream { background: var(--cream-light); }
+  .bg-dark { background: var(--wine-dark); }
+
+  /* Steps */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    margin-top: 4rem;
+    border: 1px solid rgba(130,53,49,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .step {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid rgba(130,53,49,0.15);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: rgba(130,53,49,0.12);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--wine);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .step-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--wine-dark);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.03em;
+  }
+  .step-desc {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ─── EXPERIENCE SPLIT ─── */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+  }
+  .split-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream-dark);
+  }
+  .split-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .split-image:hover img { transform: scale(1.04); }
+  .split-content {
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--off-white);
+  }
+  .feature-list {
+    margin-top: 2rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  .feature-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--wine);
+    margin-top: 0.55rem;
+  }
+
+  /* ─── PLANS ─── */
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .plan-card {
+    background: #fff;
+    border: 1px solid rgba(130,53,49,0.15);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .plan-card:hover {
+    box-shadow: 0 12px 40px rgba(130,53,49,0.12);
+    transform: translateY(-3px);
+  }
+  .plan-card.featured {
+    border-color: var(--wine);
+    border-width: 2px;
+  }
+  .plan-badge {
+    position: absolute;
+    top: -1px; right: 1.5rem;
+    background: var(--wine);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 0 0 4px 4px;
+  }
+  .plan-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wine);
+    margin-bottom: 0.5rem;
+  }
+  .plan-bottles {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--wine-dark);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .plan-bottles span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-light);
+  }
+  .plan-price {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(130,53,49,0.12);
+  }
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    color: var(--text-mid);
+  }
+  .plan-features li svg {
+    width: 16px; height: 16px;
+    stroke: var(--wine);
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .plan-btn {
+    display: block;
+    text-align: center;
+    padding: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .plan-btn-outline {
+    border: 1.5px solid var(--wine);
+    color: var(--wine);
+  }
+  .plan-btn-outline:hover {
+    background: var(--wine);
+    color: #fff;
+  }
+  .plan-btn-filled {
+    background: var(--wine);
+    color: #fff;
+    border: 1.5px solid var(--wine);
+  }
+  .plan-btn-filled:hover { background: #6a2824; }
+
+  /* ─── ORIGIN STRIP ─── */
+  .origin {
+    background: var(--wine-dark);
+    padding: 6rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .origin::before {
+    content: 'MENDOZA';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.03);
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .origin-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .origin .section-label { color: var(--cream-dark); }
+  .origin .section-title { color: var(--cream-light); }
+  .origin .section-body { color: rgba(228,212,186,0.75); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(228,212,186,0.2);
+    border: 1px solid rgba(228,212,186,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat {
+    background: rgba(65,45,23,0.5);
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(228,212,186,0.6);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: var(--cream-light); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .testimonial-card {
+    background: #fff;
+    border-radius: 4px;
+    padding: 2rem;
+    border: 1px solid rgba(130,53,49,0.1);
+  }
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1rem;
+  }
+  .star {
+    width: 14px; height: 14px;
+    background: var(--wine);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .testimonial-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--wine-dark);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .testimonial-author {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-mid);
+    letter-spacing: 0.05em;
+  }
+  .testimonial-city {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 0.15rem;
+  }
+
+  /* ─── CTA FINAL ─── */
+  .cta-final {
+    padding: 8rem 4rem;
+    text-align: center;
+    background: var(--off-white);
+    position: relative;
+  }
+  .cta-final::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(130,53,49,0.3));
+  }
+  .cta-final .section-title {
+    margin: 0 auto 1.25rem;
+    max-width: 700px;
+  }
+  .cta-final .section-body {
+    margin: 0 auto 2.5rem;
+    max-width: 520px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--wine-dark);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(228,212,186,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(228,212,186,0.45);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50%       { opacity: 0.4; transform: scaleY(0.6); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .section { padding: 5rem 1.5rem; }
+    .split { grid-template-columns: 1fr; }
+    .split-image { height: 320px; }
+    .split-content { padding: 3rem 1.5rem; }
+    .origin-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .origin { padding: 5rem 1.5rem; }
+    footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    .cta-final { padding: 5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <!-- Inline SVG of the AUCÁN logo mark (mountain + wine glass) -->
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="38" cy="40" r="28" stroke="#823531" stroke-width="3.5" fill="none" stroke-dasharray="none"/>
+      <!-- Arc open top-right -->
+      <path d="M54 17 A28 28 0 1 0 66 54" stroke="#823531" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- Mountain / A shape -->
+      <path d="M24 56 L38 26 L52 56" stroke="#823531" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M29 46 Q38 38 47 46" stroke="#823531" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <!-- Wine glass -->
+      <path d="M58 22 L58 38 M54 22 L62 22 M54 22 Q54 32 58 38 Q62 32 62 22" stroke="#823531" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M55.5 36 Q57 40 58 42 Q59 40 60.5 36" stroke="#823531" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">AUCÁN</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#origen">Origen</a></li>
+    <li><a href="#planes" class="nav-cta">Suscribirme</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Video background: replace "YOUR_VIDEO.mp4" with your actual video file or URL -->
+  <div class="hero-video-wrap">
+    <div class="hero-bg-fallback"></div>
+    <!-- Uncomment and replace src when you have your video:
+    <video autoplay muted loop playsinline poster="">
+      <source src="YOUR_VIDEO.mp4" type="video/mp4">
+    </video>
+    -->
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Club de vinos · Mendoza, Argentina</p>
+    <h1 class="hero-title">El vino tiene<br><em>origen, historia</em><br>y un momento.</h1>
+    <p class="hero-sub">Cada mes, vinos seleccionados directamente desde Mendoza llegan a tu puerta. Descubrí bodegas, conocé su historia y viví una experiencia diferente con cada botella.</p>
+    <div class="hero-actions">
+      <a href="#planes" class="btn-primary">Quiero suscribirme</a>
+      <a href="#como-funciona" class="btn-outline">Cómo funciona</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Descubrí</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section bg-cream" id="como-funciona">
+  <div class="section-inner">
+    <p class="section-label reveal">El proceso</p>
+    <h2 class="section-title reveal">Así simple.<br><em>Así auténtico.</em></h2>
+    <div class="steps-grid reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <p class="step-title">Elegís tu plan</p>
+        <p class="step-desc">Seleccionás si querés recibir 2 o 4 botellas por mes según tu ritmo y preferencias.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <p class="step-title">Curamos tu caja</p>
+        <p class="step-desc">Seleccionamos vinos de bodegas mendocinas con historia y carácter propios, eligiendo para vos.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <p class="step-title">Llega a tu puerta</p>
+        <p class="step-desc">Entre el 1 y 10 de cada mes recibís tu caja AUCÁN en casa con todo lo que necesitás para disfrutarla.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <p class="step-title">Descubrís y disfrutás</p>
+        <p class="step-desc">Aprendés sobre cada vino, su bodega y cómo servirlo. Si te enamora uno, podés pedir más.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE SPLIT -->
+<section class="split" id="experiencia">
+  <div class="split-image">
+    <!-- Replace with your actual photo -->
+    <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80" alt="Experiencia de descubrimiento de vinos AUCÁN" loading="lazy">
+  </div>
+  <div class="split-content">
+    <p class="section-label reveal">La experiencia AUCÁN</p>
+    <h2 class="section-title reveal">Más que <em>vino.</em><br>Una historia en cada botella.</h2>
+    <p class="section-body reveal">No enviamos solo vino. Enviamos el origen, la persona detrás de la bodega y el momento pensado para disfrutarlo. Cada caja es una invitación a descubrir Mendoza desde tu mesa.</p>
+    <ul class="feature-list reveal">
+      <li>Vinos seleccionados con curaduría directamente desde bodegas mendocinas</li>
+      <li>Historia de cada bodega y varietal, explicada de forma simple y cercana</li>
+      <li>Maridaje sugerido: qué comer, cómo servir, a qué temperatura</li>
+      <li>Sorpresa de experiencia incluida en cada entrega mensual</li>
+      <li>Comunidad de amantes del vino con eventos y degustaciones exclusivas</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="section" id="planes">
+  <div class="section-inner">
+    <p class="section-label reveal">Planes de suscripción</p>
+    <h2 class="section-title reveal">Elegí cómo <em>querés descubrir.</em></h2>
+    <p class="section-body reveal">Ambos planes incluyen envío a todo el país, curaduría mensual y experiencia sorpresa. Podés cancelar cuando quieras.</p>
+    <div class="plans-grid">
+      <div class="plan-card reveal">
+        <p class="plan-name">Plan Descubridor</p>
+        <p class="plan-bottles">2 <span>botellas / mes</span></p>
+        <p class="plan-price">El punto de entrada perfecto para empezar a descubrir el mundo del vino mendocino.</p>
+        <ul class="plan-features">
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            2 vinos seleccionados mensualmente
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Tarjeta con historia de cada bodega
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Sorpresa de experiencia incluida
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Envío incluido a todo el país
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Opción de comprar más del mismo vino
+          </li>
+        </ul>
+        <a href="#" class="plan-btn plan-btn-outline">Quiero este plan</a>
+      </div>
+      <div class="plan-card featured reveal">
+        <div class="plan-badge">Más elegido</div>
+        <p class="plan-name">Plan Sommelier</p>
+        <p class="plan-bottles">4 <span>botellas / mes</span></p>
+        <p class="plan-price">Para quienes quieren explorar más varietales, regiones y estilos cada mes.</p>
+        <ul class="plan-features">
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            4 vinos seleccionados mensualmente
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Tarjeta con historia de cada bodega
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Sorpresa de experiencia premium
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Envío incluido a todo el país
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Acceso anticipado a nuevas bodegas
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            Invitaciones a eventos y degustaciones
+          </li>
+        </ul>
+        <a href="#" class="plan-btn plan-btn-filled">Quiero este plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section class="origin" id="origen">
+  <div class="origin-inner">
+    <div>
+      <p class="section-label reveal">Nuestro origen</p>
+      <h2 class="section-title reveal">Nacimos en <em>Mendoza.</em><br>Llegamos a toda Argentina.</h2>
+      <p class="section-body reveal">La tierra más alta, el sol más intenso, los vinos más premiados del país. AUCÁN nació en el corazón vitivinícola de Argentina para conectarte con bodegas que tienen algo real para contarte.</p>
+      <br>
+      <a href="#planes" class="btn-primary" style="margin-top:1rem; display:inline-block;">Empezar ahora</a>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat">
+        <div class="stat-num">+900</div>
+        <div class="stat-label">Bodegas en Mendoza</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1,500m</div>
+        <div class="stat-label">Altura promedio</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">300+</div>
+        <div class="stat-label">Días de sol al año</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">#1</div>
+        <div class="stat-label">Región vitivinícola Argentina</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials">
+  <div class="section-inner">
+    <p class="section-label reveal">Lo que dicen nuestros socios</p>
+    <h2 class="section-title reveal">Parte del <em>club.</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testimonial-text">"Antes elegía siempre el mismo vino en el super. Ahora cada mes descubro algo nuevo y siento que realmente entiendo lo que estoy tomando."</p>
+        <p class="testimonial-author">Valentina M.</p>
+        <p class="testimonial-city">Buenos Aires</p>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testimonial-text">"Lo pedí para compartir con amigos y terminó siendo el tema de conversación de la noche. La experiencia que viene adentro de la caja es un detalle increíble."</p>
+        <p class="testimonial-author">Ignacio R.</p>
+        <p class="testimonial-city">Rosario</p>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="testimonial-text">"Me gusta que no hablan de 'vinos caros'. Hablan de vinos con historia. Eso hace que todo se sienta más auténtico y accesible."</p>
+        <p class="testimonial-author">Luciana P.</p>
+        <p class="testimonial-city">Córdoba</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <p class="section-label reveal">¿Listo para descubrir?</p>
+  <h2 class="section-title reveal">Tu primera caja <em>AUCÁN</em><br>está a un clic de distancia.</h2>
+  <p class="section-body reveal">Cancelás cuando quieras. Sin compromisos. Solo vino, origen e historias que vale la pena conocer.</p>
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;" class="reveal">
+    <a href="#planes" class="btn-primary">Suscribirme ahora</a>
+    <a href="#como-funciona" class="btn-outline" style="color: var(--wine-dark); border-color: rgba(65,45,23,0.3);">Ver cómo funciona</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AUCÁN</div>
+  <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Preguntas frecuentes</a></li>
+    <li><a href="#">Contacto</a></li>
+    <li><a href="#">Términos</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 AUCÁN. Mendoza, Argentina.</p>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
