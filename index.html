@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUCÁN — Club de Vinos · Mendoza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#F9F7F2; --carbon:#2D2D2D; --burg:#7B1F2E;
+  --burg-d:#5A1520; --burg-l:#A6364A; --sand:#EDE8DE;
+  --sand-d:#D8D0C4; --mist:#9A9089; --white:#FEFDFB;
+  --gold:#C8915A; --pill:999px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--carbon);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Playfair Display',serif}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto;z-index:300;padding:1.2rem 4rem;display:flex;align-items:center;justify-content:space-between;transition:background .45s,box-shadow .45s}
+nav.stuck{background:rgba(249,247,242,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(45,45,45,.08)}
+nav:not(.stuck) .logo-text{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+nav:not(.stuck) .nav-link{color:rgba(255,255,255,.85)}
+nav:not(.stuck) .nav-link:hover{color:#fff}
+nav:not(.stuck) .nav-cta{background:#fff;color:var(--burg)}
+nav:not(.stuck) .ham-bar{background:#fff}
+.logo-wrap{display:flex;align-items:center;gap:.65rem;text-decoration:none}
+.logo-img{width:34px;height:34px;object-fit:contain}
+.logo-text{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;letter-spacing:.2em;color:var(--burg);transition:color .3s}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-link{font-size:.74rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--carbon);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--burg)}
+.nav-cta{background:var(--burg);color:#fff;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.6rem 1.6rem;border-radius:var(--pill);text-decoration:none;box-shadow:0 2px 12px rgba(123,31,46,.28);transition:background .2s,transform .15s}
+.nav-cta:hover{background:var(--burg-d);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:400}
+.ham-bar{display:block;width:22px;height:1.5px;background:var(--carbon);border-radius:2px;transition:all .3s}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-vw{position:absolute;inset:0;z-index:0}
+.hero-vw::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(150deg,#1d0509 0%,#7B1F2E 65%,#a0362a 100%)}
+.hero-vw video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover}
+.hero-ov{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 85% 80% at 0% 100%,rgba(8,2,4,.92) 0%,rgba(8,2,4,.6) 32%,transparent 60%),linear-gradient(180deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.04) 40%,rgba(0,0,0,.38) 100%)}
+.hero-stripe{position:absolute;bottom:0;left:0;right:0;height:2px;z-index:3;background:linear-gradient(90deg,var(--burg) 0%,var(--gold) 50%,var(--burg-l) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 5rem 6rem;max-width:800px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.55rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);color:#fff;font-size:.62rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;padding:.42rem 1.05rem;border-radius:var(--pill);margin-bottom:1.8rem;animation:fadeUp .9s ease both}
+.ey-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px rgba(200,145,90,.65);animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,6.8vw,6rem);font-weight:700;line-height:1.05;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.7),0 6px 28px rgba(0,0,0,.45);margin-bottom:1.4rem;animation:fadeUp .9s .13s ease both}
+.hero-h1 em{font-style:italic;font-weight:400;color:var(--gold);text-shadow:0 2px 10px rgba(0,0,0,.65)}
+.hero-sub{font-size:clamp(.95rem,1.9vw,1.12rem);font-weight:300;line-height:1.82;color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.72);max-width:500px;margin-bottom:2.6rem;animation:fadeUp .9s .27s ease both}
+.hero-sub strong{color:var(--gold);font-weight:500}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;animation:fadeUp .9s .41s ease both}
+.btn-gold{background:var(--gold);color:#1a0e08;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:1.05rem 2.6rem;border:none;border-radius:var(--pill);cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 28px rgba(0,0,0,.35);transition:all .2s}
+.btn-gold:hover{background:#daa66a;transform:translateY(-2px)}
+.btn-glass{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.5);backdrop-filter:blur(6px);color:#fff;font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:1.05rem 2.6rem;border-radius:var(--pill);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-glass:hover{background:rgba(255,255,255,.18);border-color:#fff}
+.hero-micro{margin-top:1.1rem;font-size:.7rem;font-weight:300;color:rgba(255,255,255,.46);text-shadow:0 1px 4px rgba(0,0,0,.5);animation:fadeUp .9s .55s ease both}
+.hero-micro span{color:rgba(255,255,255,.7)}
+.hero-scroll{position:absolute;right:3.5rem;bottom:3rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fadeUp 1s 1.1s ease both}
+.hs-txt{writing-mode:vertical-rl;font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.42);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.hs-bar{width:1px;height:42px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:scrl 2.4s ease-in-out infinite}
+@keyframes scrl{0%,100%{opacity:1;transform:scaleY(1);transform-origin:top}50%{opacity:.25;transform:scaleY(.4)}}
+
+/* SECTIONS */
+.sec{padding:7rem 4rem}
+.si{max-width:1180px;margin:0 auto}
+.lbl{display:inline-flex;align-items:center;gap:.6rem;font-size:.62rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--burg);margin-bottom:.9rem}
+.lbl-bar{width:20px;height:1.5px;background:var(--burg-l);border-radius:2px;flex-shrink:0}
+.h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.12;color:var(--carbon);margin-bottom:1.1rem}
+.h2 em{font-style:italic;color:var(--burg)}
+.body-copy{font-size:1rem;font-weight:300;color:var(--mist);line-height:1.9;max-width:540px}
+.bg-sand{background:var(--sand)}
+.bg-white{background:var(--white)}
+.divbar{width:36px;height:1.5px;background:var(--burg-l);border-radius:2px;margin:1.5rem 0}
+.btn-burg{background:var(--burg);color:#fff;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:1rem 2.4rem;border:none;border-radius:var(--pill);cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 3px 14px rgba(123,31,46,.25);transition:all .2s}
+.btn-burg:hover{background:var(--burg-d);transform:translateY(-1px)}
+
+/* NOSOTRAS */
+.origen-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.origen-photo-wrap{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:var(--sand-d)}
+.origen-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s}
+.origen-photo-wrap:hover img{transform:scale(1.03)}
+.origen-card{position:absolute;bottom:1.8rem;left:1.8rem;right:1.8rem;background:rgba(249,247,242,.94);backdrop-filter:blur(10px);border-radius:10px;padding:1.2rem 1.5rem;border:1px solid rgba(255,255,255,.6)}
+.origen-card-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--carbon);margin-bottom:.2rem}
+.origen-card-role{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--burg)}
+.origen-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,#e8dfd4,#d4c9bc);gap:.75rem;padding:2rem;text-align:center}
+.ph-icon{font-size:2.5rem}
+.ph-txt{font-size:.82rem;color:var(--mist);line-height:1.55}
+.ph-txt strong{color:var(--carbon);font-weight:600;display:block;margin-bottom:.3rem}
+.origen-text{display:flex;flex-direction:column;justify-content:center}
+.origen-quote{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;font-style:italic;line-height:1.3;color:var(--carbon);border-left:3px solid var(--burg);padding-left:1.5rem;margin-bottom:2rem}
+.origen-p{font-size:.97rem;font-weight:300;color:var(--carbon);line-height:1.9;margin-bottom:1rem;opacity:.8}
+.origen-p strong{font-weight:600;opacity:1;color:var(--carbon)}
+.origen-nombre{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--burg)}
+.aucan-meaning{margin-top:2rem;padding:1.4rem 1.6rem;background:var(--white);border:1px solid rgba(123,31,46,.15);border-left:3px solid var(--burg);border-radius:0 8px 8px 0}
+.au-label{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--burg);margin-bottom:.4rem}
+.au-txt{font-size:.9rem;font-weight:300;color:var(--carbon);line-height:1.7;opacity:.85}
+
+/* PILARES */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+.pillar{padding:2.4rem 2rem;border-radius:14px;background:var(--white);border:1px solid var(--sand-d);transition:transform .22s,box-shadow .22s,border-color .22s;position:relative;overflow:hidden}
+.pillar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--burg),var(--gold));opacity:0;transition:opacity .22s}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(45,45,45,.07);border-color:rgba(123,31,46,.25)}
+.pillar:hover::after{opacity:1}
+.pillar-icon{width:48px;height:48px;border-radius:10px;background:rgba(123,31,46,.08);display:flex;align-items:center;justify-content:center;margin-bottom:1.4rem}
+.pillar-icon svg{width:22px;height:22px;stroke:var(--burg);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pillar-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:var(--carbon);margin-bottom:.6rem}
+.pillar-body{font-size:.87rem;font-weight:300;color:var(--mist);line-height:1.8}
+
+/* PLANES */
+.plans-intro{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;margin-bottom:3.5rem}
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.plan{border-radius:20px;padding:2.8rem 2.4rem;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.plan:hover{transform:translateY(-6px)}
+.plan.light{background:var(--white);border:1px solid var(--sand-d)}
+.plan.light:hover{box-shadow:0 20px 52px rgba(45,45,45,.07)}
+.plan.dark{background:var(--carbon);border:none;color:#fff}
+.plan.dark:hover{box-shadow:0 20px 52px rgba(45,45,45,.32)}
+.plan.dark::before{content:'';position:absolute;top:-50px;right:-50px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.plan-badge{display:inline-block;background:var(--gold);color:#1a0e08;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .9rem;border-radius:var(--pill);margin-bottom:1.4rem}
+.plan-name{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;line-height:1.05;margin-bottom:.3rem}
+.plan.light .plan-name{color:var(--carbon)}
+.plan.dark .plan-name{color:#fff}
+.plan-qty{font-size:.8rem;font-weight:300;margin-bottom:1.5rem;padding-bottom:1.4rem}
+.plan.light .plan-qty{color:var(--mist);border-bottom:1px solid var(--sand-d)}
+.plan.dark .plan-qty{color:rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.1)}
+.plan-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;line-height:1.5;margin-bottom:1.8rem}
+.plan.light .plan-tagline{color:var(--mist)}
+.plan.dark .plan-tagline{color:rgba(255,255,255,.6)}
+.plan-list{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.8rem}
+.plan-list li{display:flex;align-items:flex-start;gap:.68rem;font-size:.86rem;line-height:1.44}
+.plan.light .plan-list li{color:var(--mist)}
+.plan.dark .plan-list li{color:rgba(255,255,255,.75)}
+.pl-chk{flex-shrink:0;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.plan.light .pl-chk{background:rgba(123,31,46,.1)}
+.plan.dark .pl-chk{background:rgba(255,255,255,.12)}
+.pl-chk svg{width:9px;height:9px;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.plan.light .pl-chk svg{stroke:var(--burg)}
+.plan.dark .pl-chk svg{stroke:#fff}
+.plan-micro{font-size:.7rem;margin-bottom:1.1rem}
+.plan.light .plan-micro{color:var(--mist)}
+.plan.dark .plan-micro{color:rgba(255,255,255,.35)}
+.plan-cta{display:block;text-align:center;text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:1rem;border-radius:var(--pill);transition:all .2s}
+.plan-cta-light{background:var(--burg);color:#fff;box-shadow:0 4px 16px rgba(123,31,46,.22)}
+.plan-cta-light:hover{background:var(--burg-d);box-shadow:0 8px 26px rgba(123,31,46,.38)}
+.plan-cta-dark{background:var(--gold);color:#1a0e08;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+.plan-cta-dark:hover{background:#daa66a;box-shadow:0 8px 26px rgba(0,0,0,.28)}
+.pay-row{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1.8rem;font-size:.74rem;color:var(--mist)}
+.pay-row svg{width:16px;height:16px;stroke:var(--mist);fill:none;stroke-width:1.6}
+
+/* EXPERIENCIA */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:580px}
+.split-img{position:relative;overflow:hidden}
+.split-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s}
+.split-img:hover img{transform:scale(1.03)}
+.split-txt{padding:5rem 4.5rem;display:flex;flex-direction:column;justify-content:center;background:var(--sand)}
+.feat-list{margin-top:1.8rem;list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.feat-list li{display:flex;align-items:flex-start;gap:.82rem;font-size:.9rem;font-weight:300;color:var(--carbon);line-height:1.65;opacity:.8}
+.fdot{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(123,31,46,.1);display:flex;align-items:center;justify-content:center;margin-top:.2rem}
+.fdot::after{content:'';width:7px;height:7px;border-radius:50%;background:var(--burg)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(29,5,10,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1.5rem;animation:fadeIn .3s ease both}
+.modal-overlay.active{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--cream);border-radius:20px;padding:3rem 3rem 2.5rem;max-width:600px;width:100%;position:relative;max-height:92vh;overflow-y:auto;animation:slideUp .35s ease both}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:1.4rem;right:1.4rem;width:34px;height:34px;border-radius:50%;background:var(--sand);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--carbon);transition:background .2s}
+.modal-close:hover{background:var(--sand-d)}
+.modal-eyebrow{font-size:.62rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--burg);margin-bottom:.5rem}
+.modal-h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--carbon);margin-bottom:.5rem;line-height:1.15}
+.modal-sub{font-size:.88rem;font-weight:300;color:var(--mist);margin-bottom:2rem;line-height:1.65}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-col{display:flex;flex-direction:column;gap:.38rem}
+.form-col.full{grid-column:span 2}
+.form-lbl{font-size:.65rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mist)}
+.form-input,.form-select,.form-textarea{background:var(--white);border:1px solid var(--sand-d);border-radius:8px;padding:.82rem 1rem;font-family:'Inter',sans-serif;font-size:.9rem;color:var(--carbon);transition:border-color .2s,box-shadow .2s;width:100%}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--burg);box-shadow:0 0 0 3px rgba(123,31,46,.1)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--mist);font-weight:300}
+.form-select{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239A9089' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 1rem) center;padding-right:2.5rem}
+.form-textarea{resize:vertical;min-height:90px;line-height:1.6}
+.plan-radio-group{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:1rem}
+.plan-radio{position:relative}
+.plan-radio input{position:absolute;opacity:0;width:0;height:0}
+.plan-radio-lbl{display:block;padding:1.1rem 1.2rem;border:1px solid var(--sand-d);border-radius:10px;cursor:pointer;transition:all .2s;background:var(--white)}
+.plan-radio input:checked+.plan-radio-lbl{border-color:var(--burg);background:#FDF5F3;box-shadow:0 0 0 3px rgba(123,31,46,.1)}
+.pr-name{font-size:.88rem;font-weight:600;color:var(--carbon);margin-bottom:.18rem}
+.pr-desc{font-size:.74rem;color:var(--mist);font-weight:300}
+.form-submit{width:100%;margin-top:1.4rem;background:var(--burg);color:#fff;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:1.15rem;border:none;border-radius:var(--pill);cursor:pointer;box-shadow:0 4px 18px rgba(123,31,46,.28);transition:all .2s}
+.form-submit:hover{background:var(--burg-d);transform:translateY(-1px);box-shadow:0 8px 26px rgba(123,31,46,.38)}
+.form-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-legal{text-align:center;margin-top:.9rem;font-size:.65rem;color:var(--mist);line-height:1.5}
+.form-legal a{color:var(--burg);text-decoration:none}
+.form-success{display:none;text-align:center;padding:2rem 0}
+.form-success.show{display:block}
+.success-icon{width:56px;height:56px;border-radius:50%;background:rgba(123,31,46,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem}
+.success-icon svg{width:24px;height:24px;stroke:var(--burg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.success-h{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--carbon);margin-bottom:.7rem}
+.success-p{font-size:.9rem;font-weight:300;color:var(--mist);line-height:1.75}
+.success-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:.88rem;color:var(--burg);margin-top:1rem}
+
+/* PROOF */
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.proof-c{background:var(--white);border:1px solid var(--sand-d);border-radius:14px;padding:2rem;transition:transform .2s,box-shadow .2s}
+.proof-c:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(45,45,45,.07)}
+.proof-stars{display:flex;gap:3px;margin-bottom:1.1rem}
+.pstar{width:12px;height:12px;background:var(--burg);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.proof-q{font-family:'Playfair Display',serif;font-style:italic;font-size:.97rem;color:var(--carbon);line-height:1.72;margin-bottom:1.3rem}
+.proof-au{display:flex;align-items:center;gap:.7rem}
+.proof-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--sand-d),var(--gold));display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:var(--burg);flex-shrink:0}
+.proof-name{font-size:.78rem;font-weight:600;color:var(--carbon)}
+.proof-city{font-size:.7rem;color:var(--mist);margin-top:.1rem}
+.trust-bar{display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:3.5rem;padding-top:2.8rem;border-top:1px solid var(--sand-d)}
+.ti{display:flex;align-items:center;gap:.55rem;font-size:.78rem;font-weight:400;color:var(--mist)}
+.ti svg{width:17px;height:17px;stroke:var(--burg);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* CTA FINAL */
+.cta-sec{background:var(--carbon);padding:8rem 2rem;text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(123,31,46,.28),transparent 65%);pointer-events:none}
+.cta-lbl{color:rgba(200,145,90,.7)}
+.cta-h{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:700;color:#fff;max-width:680px;margin:0 auto 1rem;line-height:1.1}
+.cta-h em{font-style:italic;color:var(--gold)}
+.cta-p{font-size:.97rem;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8;max-width:440px;margin:0 auto 3rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-cta-a{background:var(--gold);color:#1a0e08;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:1.1rem 2.8rem;border:none;border-radius:var(--pill);cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 4px 22px rgba(0,0,0,.28);transition:all .2s}
+.btn-cta-a:hover{background:#daa66a;transform:translateY(-2px)}
+.btn-cta-b{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.25);font-size:.8rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;padding:1.1rem 2.8rem;border-radius:var(--pill);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-cta-b:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.cta-micro{margin-top:1.2rem;font-size:.67rem;color:rgba(255,255,255,.27)}
+
+/* FOOTER */
+footer{background:#1a0c0a;padding:2.8rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.4rem;border-top:1px solid rgba(255,255,255,.04)}
+.fl{font-family:'Playfair Display',serif;font-size:1.3rem;letter-spacing:.18em;color:var(--gold)}
+.fl-links{display:flex;gap:1.8rem;list-style:none;flex-wrap:wrap}
+.fl-links a{font-size:.69rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.fl-links a:hover{color:var(--gold)}
+.fl-copy{font-size:.67rem;color:rgba(255,255,255,.22)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .sec{padding:5.5rem 2.5rem}
+  .hero-content{padding:0 2.5rem 5rem}
+  .split-txt{padding:3.5rem 2.5rem}
+  footer{padding:2.5rem}
+}
+@media(max-width:768px){
+  nav{padding:.9rem 1.2rem}
+  .nav-links{display:none;position:fixed;inset:0 0 0 auto;width:78vw;max-width:300px;background:var(--cream);flex-direction:column;align-items:flex-start;padding:5rem 2rem 2rem;gap:2rem;box-shadow:-4px 0 28px rgba(0,0,0,.12);z-index:200;transition:transform .35s ease;transform:translateX(100%)}
+  .nav-links.open{transform:translateX(0)}
+  .nav-link{font-size:.9rem;color:var(--carbon)!important}
+  nav:not(.stuck) .ham-bar{background:#fff}
+  .hamburger{display:flex}
+  .nav-cta{background:var(--burg)!important;color:#fff!important;width:100%;text-align:center}
+  .hero{align-items:flex-end}
+  .hero-content{padding:0 1.5rem 5rem;max-width:100%}
+  .hero-h1{font-size:clamp(2.8rem,9.5vw,3.8rem)}
+  .hero-sub{font-size:.93rem;max-width:100%}
+  .hero-scroll{display:none}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .sec{padding:4.5rem 1.4rem}
+  .origen-grid{grid-template-columns:1fr;gap:3rem}
+  .origen-photo-wrap{aspect-ratio:3/2}
+  .pillars-grid{grid-template-columns:1fr;gap:1rem}
+  .plans-intro{grid-template-columns:1fr;gap:1.2rem}
+  .plans-grid{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .split-img{height:320px}
+  .split-txt{padding:3rem 1.4rem}
+  .proof-grid{grid-template-columns:1fr}
+  .trust-bar{gap:1.5rem}
+  .modal{padding:2.4rem 1.8rem 2rem}
+  .form-row{grid-template-columns:1fr}
+  .form-col.full{grid-column:span 1}
+  .plan-radio-group{grid-template-columns:1fr}
+  footer{padding:2.5rem 1.4rem;flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:2.5rem}
+  .hero-btns{flex-direction:column;width:100%}
+  .btn-gold,.btn-glass{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="logo-wrap">
+    <span class="logo-text">AUCÁN</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#nosotras"   class="nav-link" onclick="cM()">Nosotras</a></li>
+    <li><a href="#curaduria"  class="nav-link" onclick="cM()">Curaduría</a></li>
+    <li><a href="#membresias" class="nav-link" onclick="cM()">Membresías</a></li>
+    <li><a href="#experiencia"class="nav-link" onclick="cM()">Experiencia</a></li>
+    <li><a href="#" class="nav-cta" onclick="cM();openModal('2 Más');return false;">Unirme al club</a></li>
+  </ul>
+  <div class="hamburger" id="ham" onclick="tM()">
+    <span class="ham-bar"></span><span class="ham-bar"></span><span class="ham-bar"></span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-vw">
+    <video id="hv" autoplay muted loop playsinline preload="auto" poster="aucan_poster.jpg">
+      <source src="aucan_hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="ey-dot"></span>Mendoza · Club de vinos</div>
+    <h1 class="hero-h1">Mendoza en tu mesa,<br><em>mes a mes.</em></h1>
+    <p class="hero-sub">Julieta y Soledad seleccionan cada mes los vinos que más las emocionan y los envían directo a tu puerta. Sin complicaciones. Esto es <strong>AUCÁN.</strong></p>
+    <div class="hero-btns">
+      <a href="#membresias" class="btn-gold">Explorar Membresías</a>
+      <a href="#nosotras" class="btn-glass">Conocer la historia</a>
+    </div>
+    <p class="hero-micro"><span>Sin permanencia mínima.</span>&nbsp; Cancelás cuando quieras. Envío a todo el país.</p>
+  </div>
+  <div class="hero-scroll"><span class="hs-txt">Scroll</span><div class="hs-bar"></div></div>
+</section>
+
+<section class="sec bg-white" id="nosotras">
+  <div class="si">
+    <div class="origen-grid">
+      <div class="origen-photo-wrap rv">
+        <div class="origen-photo-placeholder">
+          <span class="ph-icon">📸</span>
+          <p class="ph-txt"><strong>Foto de Julieta y Soledad</strong>Natural, en una bodega mendocina. Sin poses. Sin estudio.</p>
+        </div>
+        <div class="origen-card">
+          <p class="origen-card-name">Julieta &amp; Soledad</p>
+          <p class="origen-card-role">Fundadoras · Mendoza</p>
+        </div>
+      </div>
+      <div class="origen-text">
+        <p class="lbl rv"><span class="lbl-bar"></span>El origen</p>
+        <blockquote class="origen-quote rv">"Somos dos amigas mendocinas que aman el vino y querían compartirlo mejor."</blockquote>
+        <p class="origen-p rv">AUCÁN nació en una mesa, con copas y una pregunta de siempre: <strong>¿por qué es tan difícil encontrar un vino que valga la pena si vivimos acá?</strong></p>
+        <p class="origen-p rv">No somos sommeliers. Somos dos mujeres que recorren bodegas, preguntan, prueban y eligen con el mismo criterio que usarían para recomendar algo a una amiga. Con gusto. Sin algoritmos. Con <strong>alma y visión propia.</strong></p>
+        <p class="origen-nombre rv">— Julieta &amp; Soledad, Mendoza 🍷</p>
+        <div class="aucan-meaning rv">
+          <p class="au-label">El nombre</p>
+          <p class="au-txt"><strong>AUCÁN</strong> proviene del mapuche: significa <em>"espíritu libre"</em> o <em>"el guerrero"</em>. Un nombre con fuerza, identidad y raíz. Igual que los vinos que elegimos.</p>
+        </div>
+        <div style="margin-top:2rem;" class="rv"><a href="#membresias" class="btn-burg">Ver membresías</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec bg-sand" id="curaduria">
+  <div class="si">
+    <p class="lbl rv"><span class="lbl-bar"></span>Cómo elegimos</p>
+    <h2 class="h2 rv">Tres pilares.<br><em>Una filosofía.</em></h2>
+    <p class="body-copy rv">Cada botella que llega a tu puerta pasó por un proceso de selección pensado con criterio. Estos son los tres ejes que guían nuestra curaduría.</p>
+    <div class="pillars-grid">
+      <div class="pillar rv">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <p class="pillar-title">Origen</p>
+        <p class="pillar-body">Conocemos personalmente las bodegas. Visitamos, preguntamos y elegimos con contexto real. Nada llega por catálogo.</p>
+      </div>
+      <div class="pillar rv d1">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <p class="pillar-title">Identidad</p>
+        <p class="pillar-body">Buscamos vinos con voz propia. Cada mes hay un hilo: un varietal, una zona, una historia que da sentido a lo que llega.</p>
+      </div>
+      <div class="pillar rv d2">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24"><path d="M8 3h8l-1.5 9a4.5 4.5 0 01-5 0L8 3z"/><line x1="12" y1="16" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+        <p class="pillar-title">Carácter</p>
+        <p class="pillar-body">No buscamos vinos "correctos". Buscamos vinos que emocionan, sorprenden y generan ganas de compartir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="membresias">
+  <div class="si">
+    <div class="plans-intro">
+      <div>
+        <p class="lbl rv"><span class="lbl-bar"></span>Membresías</p>
+        <h2 class="h2 rv">Lo que recibís<br><em>cada mes.</em></h2>
+      </div>
+      <p class="body-copy rv" style="align-self:flex-end;">Dos opciones. Ninguna trampa. En las dos ponemos el mismo cuidado.</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan light rv">
+        <p class="plan-name">De a Dos</p>
+        <p class="plan-qty">2 botellas · todos los meses</p>
+        <p class="plan-tagline">"Para empezar a descubrir sin apurarse."</p>
+        <ul class="plan-list">
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>2 vinos seleccionados por Julieta y Soledad</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Tarjeta con la historia de cada bodega</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Sorpresa de experiencia en cada caja</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Envío incluido a todo el país</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Podés pedir más del mismo vino</li>
+        </ul>
+        <p class="plan-micro">Sin permanencia. Cancelás cuando quieras.</p>
+        <a href="#" onclick="openModal('De a Dos');return false;" class="plan-cta plan-cta-light">Unirme — De a Dos</a>
+      </div>
+      <div class="plan dark rv d1">
+        <div class="plan-badge">✦ Más elegido</div>
+        <p class="plan-name">2 Más</p>
+        <p class="plan-qty">4 botellas · todos los meses</p>
+        <p class="plan-tagline">"Para los que ya saben que les gusta descubrir."</p>
+        <ul class="plan-list">
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>4 vinos seleccionados por Julieta y Soledad</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Tarjeta con la historia de cada bodega</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Sorpresa de experiencia en cada caja</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Envío incluido a todo el país</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Podés pedir más del mismo vino</li>
+          <li><div class="pl-chk"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Participación en eventos del club</li>
+        </ul>
+        <p class="plan-micro">Sin permanencia. Cancelás cuando quieras.</p>
+        <a href="#" onclick="openModal('2 Más');return false;" class="plan-cta plan-cta-dark">Unirme — 2 Más</a>
+      </div>
+    </div>
+    <p class="pay-row rv"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Pagás con MercadoPago · Seguro · Sin datos guardados en este sitio</p>
+  </div>
+</section>
+
+<section class="split" id="experiencia">
+  <div class="split-img">
+    <img src="aucan_experience.jpg" alt="Degustación real con vinos AUCÁN en Mendoza" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#c4a882,#8b6343)'">
+  </div>
+  <div class="split-txt">
+    <p class="lbl rv"><span class="lbl-bar"></span>La experiencia</p>
+    <h2 class="h2 rv">No enviamos solo vino.<br><em>Enviamos el momento.</em></h2>
+    <div class="divbar rv"></div>
+    <p class="body-copy rv">La esencia que inspiró a quien lo hizo. La historia de la bodega. El maridaje que lo hace brillar. Cada caja es una invitación a descubrir Mendoza desde tu mesa.</p>
+    <ul class="feat-list rv">
+      <li><div class="fdot"></div>Vinos que no encontrás en cualquier lado</li>
+      <li><div class="fdot"></div>Historia de cada bodega, contada de forma simple</li>
+      <li><div class="fdot"></div>Maridaje sugerido para cada botella</li>
+      <li><div class="fdot"></div>Una sorpresa de experiencia en cada entrega</li>
+      <li><div class="fdot"></div>Comunidad real, no solo una suscripción</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec bg-sand">
+  <div class="si">
+    <p class="lbl rv"><span class="lbl-bar"></span>Lo que dicen</p>
+    <h2 class="h2 rv">Ya son parte del <em>club.</em></h2>
+    <div class="proof-grid">
+      <div class="proof-c rv">
+        <div class="proof-stars"><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div></div>
+        <p class="proof-q">"Antes pedía siempre el mismo vino en el super. Ahora cada mes llega algo nuevo y siento que realmente entiendo lo que tomo."</p>
+        <div class="proof-au"><div class="proof-av">VM</div><div><p class="proof-name">Valentina M.</p><p class="proof-city">Buenos Aires · De a Dos</p></div></div>
+      </div>
+      <div class="proof-c rv d1">
+        <div class="proof-stars"><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div></div>
+        <p class="proof-q">"Lo abrí con amigos y terminó siendo el tema de la noche. La tarjeta con la historia fue el detalle que nadie esperaba."</p>
+        <div class="proof-au"><div class="proof-av">IR</div><div><p class="proof-name">Ignacio R.</p><p class="proof-city">Rosario · 2 Más</p></div></div>
+      </div>
+      <div class="proof-c rv d2">
+        <div class="proof-stars"><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div><div class="pstar"></div></div>
+        <p class="proof-q">"No hablan de puntuaciones ni de vinos caros. Hablan de historias. Eso hace que todo se sienta cercano y auténtico."</p>
+        <div class="proof-au"><div class="proof-av">LP</div><div><p class="proof-name">Luciana P.</p><p class="proof-city">Córdoba · De a Dos</p></div></div>
+      </div>
+    </div>
+    <div class="trust-bar rv">
+      <div class="ti"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Pago seguro con MercadoPago</div>
+      <div class="ti"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío a todo el país</div>
+      <div class="ti"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Atención por WhatsApp</div>
+      <div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Sin permanencia mínima</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <p class="lbl cta-lbl rv" style="justify-content:center;"><span class="lbl-bar" style="background:var(--gold);"></span>¿Lista para descubrir?</p>
+  <h2 class="cta-h rv">Tu primera caja<br><em>está a un click.</em></h2>
+  <p class="cta-p rv">Sin formularios eternos. Sin compromisos.<br>Solo vino con historia y ganas de descubrir.</p>
+  <div class="cta-btns rv">
+    <a href="#" onclick="openModal('2 Más');return false;" class="btn-cta-a">Explorar Membresías</a>
+    <a href="#curaduria" class="btn-cta-b">Ver cómo elegimos</a>
+  </div>
+  <p class="cta-micro rv">Cancelás cuando quieras · Envío incluido · Pago con MercadoPago</p>
+</section>
+
+<footer>
+  <div class="fl">AUCÁN</div>
+  <ul class="fl-links">
+    <li><a href="https://www.instagram.com/aucanclubdevinos" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="#nosotras">Nosotras</a></li>
+    <li><a href="#membresias">Membresías</a></li>
+    <li><a href="mailto:info@aucan.com.ar">Contacto</a></li>
+    <li><a href="#">Términos</a></li>
+  </ul>
+  <p class="fl-copy">© 2026 AUCÁN · Mendoza, Argentina · Hecho con gusto 🍷</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="formWrap">
+      <p class="modal-eyebrow">Membresía AUCÁN</p>
+      <h2 class="modal-h2" id="modalTitle">Empezar es simple.</h2>
+      <p class="modal-sub">Completá tus datos y nos comunicamos para confirmar y coordinar el pago.</p>
+      <!-- ⚠️ Reemplazá TUFORMID con tu ID real de Formspree (formspree.io) -->
+      <form id="subForm" action="https://formspree.io/f/TUFORMID" method="POST">
+        <div style="margin-bottom:1.1rem;">
+          <p class="form-lbl" style="margin-bottom:.7rem;">Plan de interés</p>
+          <div class="plan-radio-group">
+            <div class="plan-radio">
+              <input type="radio" name="plan" id="p1" value="De a Dos">
+              <label class="plan-radio-lbl" for="p1"><div class="pr-name">De a Dos</div><div class="pr-desc">2 botellas / mes</div></label>
+            </div>
+            <div class="plan-radio">
+              <input type="radio" name="plan" id="p2" value="2 Más" checked>
+              <label class="plan-radio-lbl" for="p2"><div class="pr-name">2 Más ✦</div><div class="pr-desc">4 botellas / mes</div></label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="form-lbl" for="fn">Nombre completo</label>
+            <input class="form-input" type="text" id="fn" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-col">
+            <label class="form-lbl" for="fe">Email</label>
+            <input class="form-input" type="email" id="fe" name="email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col">
+            <label class="form-lbl" for="ft">Teléfono / WhatsApp</label>
+            <input class="form-input" type="tel" id="ft" name="telefono" placeholder="11 1234-5678" required>
+          </div>
+          <div class="form-col">
+            <label class="form-lbl" for="fpref">¿Qué preferís?</label>
+            <select class="form-select" id="fpref" name="preferencia">
+              <option value="">Sin preferencia</option>
+              <option value="tintos">Tintos</option>
+              <option value="blancos">Blancos</option>
+              <option value="mixto">Mezcla</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-col full">
+            <label class="form-lbl" for="fexp">¿Qué buscás en tu experiencia de vino?</label>
+            <textarea class="form-textarea" id="fexp" name="experiencia" placeholder="Contanos: ¿descubrir nuevas bodegas, tener algo especial para compartir, aprender más...?"></textarea>
+          </div>
+        </div>
+        <input type="hidden" name="_subject" value="Nueva membresía AUCÁN 🍷">
+        <button type="submit" class="form-submit" id="submitBtn">Quiero unirme al club →</button>
+        <p class="form-legal">Al enviar confirmás que sos mayor de 18 años y aceptás los <a href="#">términos del servicio</a>. No compartimos tu información con terceros.</p>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h3 class="success-h">¡Todo listo!</h3>
+      <p class="success-p">Tu viaje por el terroir mendocino comienza ahora.<br>Nos comunicaremos pronto para coordinar tu primera caja.</p>
+      <p class="success-sub">— Julieta &amp; Soledad, AUCÁN</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('stuck',scrollY>50),{passive:true});
+function tM(){document.getElementById('navLinks').classList.toggle('open')}
+function cM(){document.getElementById('navLinks').classList.remove('open')}
+document.addEventListener('click',e=>{const nl=document.getElementById('navLinks'),h=document.getElementById('ham');if(nl.classList.contains('open')&&!nl.contains(e.target)&&!h.contains(e.target))cM()});
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('in'),i*55);io.unobserve(e.target)}})},{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const v=document.getElementById('hv');
+if(v)v.play().catch(()=>{});
+function openModal(plan){
+  if(plan){const r=document.querySelector(`input[value="${plan}"]`);if(r)r.checked=true}
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>{const fn=document.getElementById('fn');if(fn)fn.focus()},350);
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.getElementById('subForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.textContent='Enviando...';
+  try{
+    const resp=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+    if(resp.ok){
+      document.getElementById('formWrap').style.display='none';
+      document.getElementById('formSuccess').classList.add('show');
+      setTimeout(closeModal,5000);
+    }else{
+      btn.disabled=false;btn.textContent='Quiero unirme al club →';
+      alert('Hubo un problema. Por favor escribinos a info@aucan.com.ar');
+    }
+  }catch(err){
+    btn.disabled=false;btn.textContent='Quiero unirme al club →';
+    const d=new FormData(this);
+    const msg=encodeURIComponent(`¡Hola! Quiero unirme a AUCÁN 🍷\n\nPlan: ${d.get('plan')}\nNombre: ${d.get('nombre')}\nEmail: ${d.get('email')}\nTeléfono: ${d.get('telefono')}`);
+    window.open(`https://wa.me/TUNUMERO?text=${msg}`,'_blank');
+  }
+});
+</script>
+</body>
+</html>
